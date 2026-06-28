@@ -46,7 +46,7 @@ public class DoctorRequest {
 	private Integer experience;
 
 	@NotNull(message = "Please enter Consultation Fee")
-	private double consultationFee;
+	private Double consultationFee;
 	
 	@NotNull(message = "Please select Gender")
 	private Gender gender;
@@ -66,7 +66,7 @@ public class DoctorRequest {
 			@NotNull(message = "Please select Specialization") Specialization specialization,
 			@NotBlank(message = "Please enter Qualification") String qualification,
 			@NotNull(message = "Please enter Experience") Integer experience,
-			@NotNull(message = "Please enter Consultation Fee") double consultationFee,
+			@NotNull(message = "Please enter Consultation Fee") Double consultationFee,
 			@NotNull(message = "Please select Gender") Gender gender,
 			@NotNull(message = "Please select Availability") Boolean available) {
 		super();
@@ -138,11 +138,11 @@ public class DoctorRequest {
 		this.experience = experience;
 	}
 
-	public double getConsultationFee() {
+	public Double getConsultationFee() {
 		return consultationFee;
 	}
 
-	public void setConsultationFee(double consultationFee) {
+	public void setConsultationFee(Double consultationFee) {
 		this.consultationFee = consultationFee;
 	}
 

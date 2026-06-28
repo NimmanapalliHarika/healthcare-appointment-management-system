@@ -55,7 +55,7 @@ public class Doctor {
 	private Integer experience;
 	
 	@Column(nullable = false)
-	private double consultationFee;
+	private Double consultationFee;
 	
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -74,7 +74,7 @@ public class Doctor {
 	}
 
 	public Doctor(Long doctorId, String firstName, String lastName, String email, String phoneNumber,
-			Specialization specialization, String qualification, Integer experience, double consultationFee,
+			Specialization specialization, String qualification, Integer experience, Double consultationFee,
 			Gender gender, Boolean available, LocalDateTime createdAt) {
 		super();
 		this.doctorId = doctorId;
@@ -155,11 +155,11 @@ public class Doctor {
 		this.experience = experience;
 	}
 
-	public double getConsultationFee() {
+	public Double getConsultationFee() {
 		return consultationFee;
 	}
 
-	public void setConsultationFee(double consultationFee) {
+	public void setConsultationFee(Double consultationFee) {
 		this.consultationFee = consultationFee;
 	}
 
