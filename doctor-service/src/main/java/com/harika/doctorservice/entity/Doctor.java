@@ -67,6 +67,125 @@ public class Doctor {
 	@CreationTimestamp
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
+
+	public Doctor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Doctor(Long doctorId, String firstName, String lastName, String email, String phoneNumber,
+			Specialization specialization, String qualification, Integer experience, double consultationFee,
+			Gender gender, Boolean available, LocalDateTime createdAt) {
+		super();
+		this.doctorId = doctorId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phoneNumber = phoneNumber;
+		this.specialization = specialization;
+		this.qualification = qualification;
+		this.experience = experience;
+		this.consultationFee = consultationFee;
+		this.gender = gender;
+		this.available = available;
+		this.createdAt = createdAt;
+	}
+
+	public Long getDoctorId() {
+		return doctorId;
+	}
+
+	public void setDoctorId(Long doctorId) {
+		this.doctorId = doctorId;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public Specialization getSpecialization() {
+		return specialization;
+	}
+
+	public void setSpecialization(Specialization specialization) {
+		this.specialization = specialization;
+	}
+
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
+	public Integer getExperience() {
+		return experience;
+	}
+
+	public void setExperience(Integer experience) {
+		this.experience = experience;
+	}
+
+	public double getConsultationFee() {
+		return consultationFee;
+	}
+
+	public void setConsultationFee(double consultationFee) {
+		this.consultationFee = consultationFee;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
+	}
+
+	public Boolean getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 	
 	
 
