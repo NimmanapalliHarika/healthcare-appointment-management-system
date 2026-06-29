@@ -1,12 +1,12 @@
 server:
-  port: 8082
+  port: 8083
 
 spring:
   application:
-    name: doctor-service
+    name: appointment-service
 
   datasource:
-    url: jdbc:mysql://localhost:3306/doctor_db
+    url: jdbc:mysql://localhost:3306/appointment_db
     username: root
     password: root
 
