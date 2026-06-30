@@ -2,6 +2,9 @@ package com.harika.doctorservice.service.impl;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.harika.doctorservice.dto.request.DoctorRequest;
@@ -42,6 +45,7 @@ public class DoctorServiceImpl implements DoctorService {
 
         return doctorMapper.toResponse(savedDoctor);
     }
+    @Cacheable(value = "doctors", key = "#doctorId")
     @Override
     public DoctorResponse getDoctorById(Long doctorId) {
 
@@ -60,6 +64,7 @@ public class DoctorServiceImpl implements DoctorService {
                 .map(doctorMapper::toResponse)
                 .toList();
     }
+    @CachePut(value = "doctors", key = "#doctorId")
     @Override
     public DoctorResponse updateDoctor(Long doctorId, DoctorRequest request) {
 
@@ -101,6 +106,7 @@ public class DoctorServiceImpl implements DoctorService {
 
         return doctorMapper.toResponse(updatedDoctor);
     }
+    @CacheEvict(value = "doctors", key = "#doctorId")
     @Override
     public void deleteDoctor(Long doctorId) {
 

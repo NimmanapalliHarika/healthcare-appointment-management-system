@@ -1,5 +1,6 @@
 package com.harika.doctorservice.dto.response;
 
+
 import java.time.LocalDateTime;
 
 import com.harika.doctorservice.enums.Gender;
@@ -12,7 +13,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DoctorResponse {
+public class DoctorResponse{
 	private Long doctorId;
 	public DoctorResponse() {
 		super();
