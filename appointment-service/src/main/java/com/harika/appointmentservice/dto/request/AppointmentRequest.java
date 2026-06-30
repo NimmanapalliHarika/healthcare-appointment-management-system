@@ -35,25 +35,9 @@ public class AppointmentRequest {
     @NotBlank(message = "Reason is required")
     private String reason;
 
-    public AppointmentRequest() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public AppointmentRequest(@NotNull(message = "Patient ID is required") Long patientId,
-			@NotNull(message = "Doctor ID is required") Long doctorId,
-			@NotNull(message = "Appointment date is required") @FutureOrPresent(message = "Appointment date cannot be in the past") LocalDate appointmentDate,
-			@NotNull(message = "Appointment time is required") LocalTime appointmentTime,
-			@NotBlank(message = "Reason is required") String reason,
-			@NotNull(message = "Appointment status is required") AppointmentStatus status) {
-		super();
-		this.patientId = patientId;
-		this.doctorId = doctorId;
-		this.appointmentDate = appointmentDate;
-		this.appointmentTime = appointmentTime;
-		this.reason = reason;
-		this.status = status;
-	}
+    @NotNull(message = "Appointment status is required")
+    
+    private AppointmentStatus status;
 
 	public Long getPatientId() {
 		return patientId;
@@ -102,7 +86,4 @@ public class AppointmentRequest {
 	public void setStatus(AppointmentStatus status) {
 		this.status = status;
 	}
-
-	@NotNull(message = "Appointment status is required")
-    private AppointmentStatus status;
 }

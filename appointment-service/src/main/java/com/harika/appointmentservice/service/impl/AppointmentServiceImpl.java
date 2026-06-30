@@ -17,6 +17,9 @@ import com.harika.appointmentservice.mapper.AppointmentMapper;
 import com.harika.appointmentservice.repository.AppointmentRepository;
 import com.harika.appointmentservice.service.AppointmentService;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
+
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
 
@@ -29,45 +32,56 @@ public class AppointmentServiceImpl implements AppointmentService {
                                   AppointmentMapper appointmentMapper,
                                   PatientClient patientClient,
                                   DoctorClient doctorClient) {
-
         this.appointmentRepository = appointmentRepository;
         this.appointmentMapper = appointmentMapper;
         this.patientClient = patientClient;
         this.doctorClient = doctorClient;
     }
+    @Retry(
+    	    name = "doctorServiceRetry",
+    	    fallbackMethod = "bookAppointmentFallback"
+    	)
+    @CircuitBreaker(name = "doctorService", fallbackMethod = "bookAppointmentFallback")
     @Override
     public AppointmentResponse bookAppointment(AppointmentRequest request) {
 
         // Validate Patient
-        PatientResponse patient =
-                patientClient.getPatientById(request.getPatientId());
+        PatientResponse patient = patientClient.getPatientById(request.getPatientId());
+
+        if (patient == null) {
+            throw new ResourceNotFoundException("Patient not found");
+        }
 
         // Validate Doctor
-        DoctorResponse doctor =
-                doctorClient.getDoctorById(request.getDoctorId());
+        DoctorResponse doctor = doctorClient.getDoctorById(request.getDoctorId());
+
+        if (doctor == null) {
+            throw new ResourceNotFoundException("Doctor not found");
+        }
 
         // Check Doctor Availability
         if (!doctor.getAvailable()) {
-            throw new BadRequestException(
-                    "Doctor is currently unavailable.");
+            throw new BadRequestException("Doctor is currently unavailable.");
         }
 
         Appointment appointment = appointmentMapper.toEntity(request);
 
-        Appointment savedAppointment =
-                appointmentRepository.save(appointment);
+        Appointment savedAppointment = appointmentRepository.save(appointment);
 
         return appointmentMapper.toResponse(savedAppointment);
     }
+
     @Override
     public AppointmentResponse getAppointmentById(Long appointmentId) {
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Appointment not found with ID: " + appointmentId));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Appointment not found with ID: " + appointmentId));
 
         return appointmentMapper.toResponse(appointment);
     }
+
     @Override
     public List<AppointmentResponse> getAllAppointments() {
 
@@ -76,13 +90,15 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .map(appointmentMapper::toResponse)
                 .toList();
     }
+
     @Override
     public AppointmentResponse updateAppointment(Long appointmentId,
                                                  AppointmentRequest request) {
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Appointment not found with ID: " + appointmentId));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Appointment not found with ID: " + appointmentId));
 
         if (request.getPatientId() != null) {
             patientClient.getPatientById(request.getPatientId());
@@ -90,6 +106,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
 
         if (request.getDoctorId() != null) {
+
             DoctorResponse doctor =
                     doctorClient.getDoctorById(request.getDoctorId());
 
@@ -101,31 +118,43 @@ public class AppointmentServiceImpl implements AppointmentService {
             appointment.setDoctorId(request.getDoctorId());
         }
 
-        if (request.getAppointmentDate() != null)
+        if (request.getAppointmentDate() != null) {
             appointment.setAppointmentDate(request.getAppointmentDate());
+        }
 
-        if (request.getAppointmentTime() != null)
+        if (request.getAppointmentTime() != null) {
             appointment.setAppointmentTime(request.getAppointmentTime());
+        }
 
-        if (request.getReason() != null)
+        if (request.getReason() != null) {
             appointment.setReason(request.getReason());
+        }
 
-        if (request.getStatus() != null)
+        if (request.getStatus() != null) {
             appointment.setStatus(request.getStatus());
+        }
 
         Appointment updatedAppointment =
                 appointmentRepository.save(appointment);
 
         return appointmentMapper.toResponse(updatedAppointment);
     }
+
     @Override
     public void cancelAppointment(Long appointmentId) {
 
         Appointment appointment = appointmentRepository.findById(appointmentId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Appointment not found with ID: " + appointmentId));
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                "Appointment not found with ID: " + appointmentId));
 
         appointmentRepository.delete(appointment);
     }
+    public AppointmentResponse bookAppointmentFallback(
+            AppointmentRequest request,
+            Exception ex) {
 
+        throw new BadRequestException(
+                "Doctor Service is temporarily unavailable. Please try again later.");
+    }
 }
