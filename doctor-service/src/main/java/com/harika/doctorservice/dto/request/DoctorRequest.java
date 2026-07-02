@@ -2,10 +2,6 @@ package com.harika.doctorservice.dto.request;
 
 import com.harika.doctorservice.enums.Gender;
 import com.harika.doctorservice.enums.Specialization;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -54,34 +50,8 @@ public class DoctorRequest {
 	@NotNull(message = "Please select Availability")
 	private Boolean available;
 
-	public DoctorRequest() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public DoctorRequest(@NotBlank(message = "Please enter FirstName") String firstName,
-			@NotBlank(message = "Please enter LastName") String lastName,
-			@Email(message = "Please enter valid email") @NotBlank(message = "Please enter email") String email,
-			@NotBlank(message = "Please enter PhoneNumber ") @Pattern(regexp = "^[6-9]\\d{9}$", message = "Please enter valid phoneNumber") String phoneNumber,
-			@NotNull(message = "Please select Specialization") Specialization specialization,
-			@NotBlank(message = "Please enter Qualification") String qualification,
-			@NotNull(message = "Please enter Experience") Integer experience,
-			@NotNull(message = "Please enter Consultation Fee") Double consultationFee,
-			@NotNull(message = "Please select Gender") Gender gender,
-			@NotNull(message = "Please select Availability") Boolean available) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.specialization = specialization;
-		this.qualification = qualification;
-		this.experience = experience;
-		this.consultationFee = consultationFee;
-		this.gender = gender;
-		this.available = available;
-	}
-
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}

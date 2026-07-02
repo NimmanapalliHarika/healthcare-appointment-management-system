@@ -45,7 +45,7 @@ public class DoctorServiceImpl implements DoctorService {
 
         return doctorMapper.toResponse(savedDoctor);
     }
-    @Cacheable(value = "doctors", key = "#doctorId")
+   // @Cacheable(value = "doctors", key = "#doctorId")
     @Override
     public DoctorResponse getDoctorById(Long doctorId) {
 

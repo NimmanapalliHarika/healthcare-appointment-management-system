@@ -15,27 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DoctorResponse{
 	private Long doctorId;
-	public DoctorResponse() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public DoctorResponse(Long doctorId, String firstName, String lastName, String email, String phoneNumber,
-			Specialization specialization, String qualification, Integer experience, Gender gender,
-			Double consultationFee, Boolean available, LocalDateTime createdAt) {
-		super();
-		this.doctorId = doctorId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.specialization = specialization;
-		this.qualification = qualification;
-		this.experience = experience;
-		this.gender = gender;
-		this.consultationFee = consultationFee;
-		this.available = available;
-		this.createdAt = createdAt;
-	}
+	
 	public Long getDoctorId() {
 		return doctorId;
 	}

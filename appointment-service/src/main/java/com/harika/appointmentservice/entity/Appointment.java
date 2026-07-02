@@ -120,22 +120,6 @@ public class Appointment {
 		this.createdAt = createdAt;
 	}
 
-	public Appointment(Long appointmentId, Long patientId, Long doctorId, LocalDate appointmentDate,
-			LocalTime appointmentTime, String reason, AppointmentStatus status, LocalDateTime createdAt) {
-		super();
-		this.appointmentId = appointmentId;
-		this.patientId = patientId;
-		this.doctorId = doctorId;
-		this.appointmentDate = appointmentDate;
-		this.appointmentTime = appointmentTime;
-		this.reason = reason;
-		this.status = status;
-		this.createdAt = createdAt;
-	}
-
-	public Appointment() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
 }

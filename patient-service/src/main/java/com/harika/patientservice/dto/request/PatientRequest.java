@@ -48,27 +48,9 @@ public class PatientRequest {
 	
 	
 
-	public PatientRequest() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	
 
-	public PatientRequest(@NotBlank(message = "First name is required") String firstName,
-			@NotBlank(message = "Last name is required") String lastName,
-			@NotBlank(message = "Email is required") @Email(message = "Invalid email format") String email,
-			@NotBlank(message = "Phone number is required") @Pattern(regexp = "^[6-9]\\d{9}$", message = "Phone number must be a valid 10-digit Indian mobile number") String phoneNumber,
-			@Past(message = "Date of birth must be in the past") LocalDate dateOfBirth,
-			@NotBlank(message = "Address is required") String address, Gender gender, BloodGroup bloodGroup) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.dateOfBirth = dateOfBirth;
-		this.address = address;
-		this.gender = gender;
-		this.bloodGroup = bloodGroup;
-	}
+	
 
 	public String getFirstName() {
 		return firstName;

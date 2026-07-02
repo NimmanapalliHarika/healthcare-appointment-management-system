@@ -30,27 +30,7 @@ public class PatientResponse {
 
 	private String phoneNumber;
 
-	public PatientResponse() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-
-	public PatientResponse(Long patientId, String firstName, String lastName, String email, String phoneNumber,
-			Gender gender, BloodGroup bloodGroup, LocalDate dateOfBirth, String address, LocalDateTime createdAt) {
-		super();
-		this.patientId = patientId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.gender = gender;
-		this.bloodGroup = bloodGroup;
-		this.dateOfBirth = dateOfBirth;
-		this.address = address;
-		this.createdAt = createdAt;
-	}
-
+	
 
 	public Long getPatientId() {
 		return patientId;

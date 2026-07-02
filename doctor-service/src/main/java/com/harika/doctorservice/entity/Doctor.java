@@ -68,29 +68,8 @@ public class Doctor {
 	@Column(updatable = false)
 	private LocalDateTime createdAt;
 
-	public Doctor() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Doctor(Long doctorId, String firstName, String lastName, String email, String phoneNumber,
-			Specialization specialization, String qualification, Integer experience, Double consultationFee,
-			Gender gender, Boolean available, LocalDateTime createdAt) {
-		super();
-		this.doctorId = doctorId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.specialization = specialization;
-		this.qualification = qualification;
-		this.experience = experience;
-		this.consultationFee = consultationFee;
-		this.gender = gender;
-		this.available = available;
-		this.createdAt = createdAt;
-	}
-
+	
+	
 	public Long getDoctorId() {
 		return doctorId;
 	}

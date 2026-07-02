@@ -9,17 +9,6 @@ public class ErrorResponse {
     private String message;
     private String path;
 
-    public ErrorResponse() {
-    }
-
-    public ErrorResponse(LocalDateTime timestamp, int status, String error, String message, String path) {
-        this.timestamp = timestamp;
-        this.status = status;
-        this.error = error;
-        this.message = message;
-        this.path = path;
-    }
-
 	public LocalDateTime getTimestamp() {
 		return timestamp;
 	}
